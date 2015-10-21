@@ -8,6 +8,7 @@ import io.undertow.servlet.api.DeploymentInfo;
 
 import org.jboss.resteasy.plugins.server.undertow.UndertowJaxrsServer;
 import org.jboss.resteasy.spi.ResteasyDeployment;
+import java.sql.*;
 
 public class SwiftlyServer {
 	private final UndertowJaxrsServer server = new UndertowJaxrsServer();
@@ -30,15 +31,15 @@ public class SwiftlyServer {
 		server.deploy(deploymentInfo);
 	}
 	
-	public static void main(String[] args) throws ServletException 
+	public static void main(String[] args) throws ServletException, ClassNotFoundException, SQLException 
 	{
-		// Access resources at localhost:8080/swiftly/app/resource_name
+		// Access resources at localhost:8080/api/resource_name
 		SwiftlyServer swiftlyServer = new SwiftlyServer("0.0.0.0", 8080);
-		DeploymentInfo deploymentInfo = swiftlyServer.deployApplication("/app", SwiftlyApp.class);
+		DeploymentInfo deploymentInfo = swiftlyServer.deployApplication("/", SwiftlyApp.class);
 		
 		deploymentInfo.setClassLoader(SwiftlyServer.class.getClassLoader());
 		deploymentInfo.setDeploymentName("Swiftly");
-		deploymentInfo.setContextPath("/swiftly");
+		deploymentInfo.setContextPath("/api");
 		
 		swiftlyServer.deploy(deploymentInfo);
 	}

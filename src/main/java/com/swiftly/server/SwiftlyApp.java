@@ -5,12 +5,13 @@ import java.util.Set;
 import javax.ws.rs.core.Application;
 
 public class SwiftlyApp extends Application{
-	
+		
 	@Override
     public Set<Class<?>> getClasses()
     {
        HashSet<Class<?>> resources = new HashSet<Class<?>>();
-       resources.add(HeartRateResource.class);
+       resources.add(DataPointResource.class);
+       resources.add(RunResource.class);
        return resources;
     }
 }

@@ -13,6 +13,12 @@ target/
 *.war
 *.ear
 *.db
+
+# Private key files
+*.pem
+
+# Config file containing connection info for remote AWS database
+hibernate.cfg.xml
  
 ######################
 # Windows

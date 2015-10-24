@@ -18,7 +18,10 @@ target/
 *.pem
 
 # Config file containing connection info for remote AWS database
-hibernate.cfg.xml
+hibernate.cfg.xml*
+
+# Text files
+*.txt
  
 ######################
 # Windows

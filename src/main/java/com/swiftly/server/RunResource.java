@@ -7,6 +7,7 @@ import javax.ws.rs.QueryParam;
 
 import javax.ws.rs.Produces;
 
+import java.io.Serializable;
 import java.sql.*;
 import java.util.List;
 
@@ -25,11 +26,16 @@ public class RunResource extends BaseResource
 {
 	public RunResource() throws ClassNotFoundException, SQLException {
 		super();
-		System.out.println("Initializing RunResource");
 	}
 	
-	
-	// Found at /api/runs
+
+	/*
+	 * Access via a GET request to /api/runs. Returns a JSON-serialized
+	 * list of all the Run instances in our database (for debugging
+	 * purposes).
+	 * 
+	 * TODO remove this before we release our app publicly.
+	 */
 	@GET
     @Produces("application/json")
     public String get() throws JsonProcessingException, SQLException
@@ -49,25 +55,34 @@ public class RunResource extends BaseResource
 		return jsonString;
     }
 	
-	// Found at /api/runs/
+	/*
+	 * Access via a POST request to /api/runs
+	 * 
+	 * Creates a new Run entry in our database with fields as specified 
+	 * in the POST request's body.  
+	 * 
+	 * The request body should consist of JSON describing
+	 * the run's fields, e.g. {"userId": 300}). Note that 
+	 * Jackson autogenerates the primary key (id) for each run
+	 * object so you can also include an id field in the JSON.
+	 */
 	@POST	
 	@Consumes("application/json")
-	public Response post(Run run) throws SQLException
+	@Produces("application/json")
+	public String post(Run run) throws SQLException, JsonProcessingException
 	{
-		System.out.println("Creating run!");
-		String result = "Run created : " + run;
-		System.out.println(result);
-
+		
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		
-		session.save(run);
+		Long id = (Long) session.save(run);
+		run.setId(id);
 		
 		
 		session.getTransaction().commit();
 		session.close();
-		
-		return Response.status(201).entity(result).build();
+
+		return "{id: " + run.getId() + "}";
 	}
 	
 }

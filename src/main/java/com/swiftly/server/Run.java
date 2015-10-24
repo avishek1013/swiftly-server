@@ -20,6 +20,10 @@ public class Run implements Serializable {
 		
 	}
 	
+	public Run(Long userId) {
+		this.userId = userId;
+	}
+	
 	public Run(Long id, Long userId) {
 		this.id = id;
 		this.userId = userId;

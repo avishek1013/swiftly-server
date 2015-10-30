@@ -12,6 +12,7 @@ public class SwiftlyApp extends Application{
        HashSet<Class<?>> resources = new HashSet<Class<?>>();
        resources.add(MeasurementResource.class);
        resources.add(RunResource.class);
+       resources.add(RunnerResource.class);
        return resources;
     }
 }

@@ -28,6 +28,10 @@ public class Runner implements Serializable {
 		this.userName = userName;
 	}
 	
+	public Long getUserId() {
+		return id;
+	}
+	
 	public String getUserName() {
 		return userName;
 	}

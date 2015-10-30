@@ -10,7 +10,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -67,11 +69,14 @@ public class RunnerResource extends BaseResource
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		
-		// Add code to return proepr userId from database here
+		// Add code to return proper userId from database here
+		List<Runner> runner_list = session.createCriteria(Runner.class)
+				.add(Restrictions.eq("userName",runner.getUserName()))
+				.list();
 		
 		session.getTransaction().commit();
 		session.close();
-		return "{\"id\": 0}";
+		return "{\"userId\":" + runner_list.get(0).getUserId() + "}";
 	}
 
 }

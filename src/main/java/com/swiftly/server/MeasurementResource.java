@@ -16,6 +16,8 @@ import org.hibernate.Session;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 //import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 
 
@@ -47,7 +49,8 @@ public class MeasurementResource extends BaseResource
 		session.close();
 		
 
-		String jsonString = this.mapper.writeValueAsString(datapoints);		
+		ObjectWriter w = this.mapper.writer().without(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+		String jsonString = w.writeValueAsString(datapoints);	
 		return jsonString;
     }
 	
@@ -74,7 +77,8 @@ public class MeasurementResource extends BaseResource
 		}
 		session.close();
 		
-		String jsonString = this.mapper.writeValueAsString(points);				
+		ObjectWriter w = this.mapper.writer();
+		String jsonString = w.writeValueAsString(points);				
 		return Response.status(201).entity(jsonString).build();
 	}
 	

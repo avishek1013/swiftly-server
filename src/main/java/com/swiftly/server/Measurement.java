@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class Measurement implements Serializable {
 
@@ -23,6 +25,7 @@ public class Measurement implements Serializable {
 	private Long runId;
 	private String type;
 
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="MM-dd-YYYY HH:mm:ss.SSS zz", timezone="PST")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date startTime;	
 	

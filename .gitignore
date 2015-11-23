@@ -22,6 +22,9 @@ hibernate.cfg.xml*
 
 # Text files
 *.txt
+
+# CSVs
+*.csv
  
 ######################
 # Windows

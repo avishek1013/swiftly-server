@@ -13,6 +13,7 @@ public class SwiftlyApp extends Application{
        resources.add(MeasurementResource.class);
        resources.add(RunResource.class);
        resources.add(RunnerResource.class);
+       resources.add(AllRunsResource.class);
        return resources;
     }
 }

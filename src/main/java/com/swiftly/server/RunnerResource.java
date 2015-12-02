@@ -76,7 +76,7 @@ public class RunnerResource extends BaseResource
 		
 		session.getTransaction().commit();
 		session.close();
-		return "{\"userId\":" + runner_list.get(0).getUserId() + "}";
+		return "{\"userId\":" + runner_list.get(0).getId() + "}";
 	}
 
 }

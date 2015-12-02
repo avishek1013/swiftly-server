@@ -28,7 +28,8 @@ public class Measurement implements Serializable {
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="MM-dd-YYYY HH:mm:ss.SSS zz", timezone="PST")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date startTime;	
-	
+
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="MM-dd-YYYY HH:mm:ss.SSS zz", timezone="PST")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date endTime;	
 	

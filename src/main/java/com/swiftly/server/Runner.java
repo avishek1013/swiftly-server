@@ -32,6 +32,12 @@ public class Runner implements Serializable {
 		return id;
 	}
 	
+	public void setUserId(Long id) {
+		this.id = id;
+	}
+	
+	
+	
 	public String getUserName() {
 		return userName;
 	}

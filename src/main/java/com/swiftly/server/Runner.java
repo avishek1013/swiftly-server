@@ -1,6 +1,8 @@
 package com.swiftly.server;
 
 import java.io.Serializable;
+import java.math.BigInteger;
+import java.security.SecureRandom;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,9 +18,23 @@ public class Runner implements Serializable {
 	private String userName;
 	private String firstName;
 	private String lastName;
+	
+	// Facebook-assigned user ID of the runner
+	private String fbUserId;
+	
+	// Access token provided by FB API to make API requests
+	// on behalf of a given Runner (user)
+	private String fbAccessToken;
+	
+	// Access token we generate, used by the user to make
+	// API requests to our server
+	private String accessToken;
+	
 	private int age;
 	private int height;
 	private int weight;
+	
+	
 	
 	public Runner() {
 		
@@ -27,6 +43,7 @@ public class Runner implements Serializable {
 	public Runner(String userName) {
 		this.userName = userName;
 	}
+	
 	
 	public Long getId() {
 		return id;
@@ -104,6 +121,35 @@ public class Runner implements Serializable {
                 .append(", 'height' : ").append(this.height)
                 .append(", 'weight' : ").append(this.weight)
                 .toString();
+	}
+
+	public String getFbAccessToken() {
+		return fbAccessToken;
+	}
+
+	public void setFbAccessToken(String fbAccessToken) {
+		this.fbAccessToken = fbAccessToken;
+	}
+
+	public void setRandomAccessToken() {
+		SecureRandom random = new SecureRandom();
+		this.accessToken = new BigInteger(130, random).toString(32);
+	}
+	
+	public String getAccessToken() {
+		return accessToken;
+	}
+
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
+	}
+
+	public String getFbUserId() {
+		return fbUserId;
+	}
+
+	public void setFbUserId(String fbUserId) {
+		this.fbUserId = fbUserId;
 	}
 	
 }
